@@ -64,7 +64,7 @@ class Hand:
         return False 
 
     @property
-    def is_quad(self):    
+    def is_full(self):    
         if self.num_matches == 8:
             return True
         return False 
@@ -75,6 +75,15 @@ class Hand:
             return True
         return False 
     
+    @property
+    def is_straight(self):    
+        if self.num_matches != 0:
+            return False
+        self.hand.sort()
+        if Card.RANKS.index(self.hand[-1].rank) != Card.RANKS.index(self.hand[0].rank) + 4:
+            return False
+        return True
+
 
         
 # deck = Deck()
@@ -97,10 +106,9 @@ while matches < 1000:
     deck.shuffle()
     h = Hand()
     count += 1
-    # if h.is_flush:
-    #     matches += 1
-    if h.is_quad:
+    if h.is_straight:
         matches += 1
+
 print(100*(matches/count))
 
 
