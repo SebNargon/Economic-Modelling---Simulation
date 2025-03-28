@@ -38,6 +38,12 @@ class Deck:
     def __str__(self):
         return f"{self._deck}"
     
+    def __eq__(self, other):
+        return self.rank == other.rank
+    
+    def __lt__(self, other):
+        return self.RANKS.index(self.rank) < self.RANKS.index(other.rank)
+    
     def shuffle(self):
         random.shuffle(self._deck)
         
